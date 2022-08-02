@@ -1,0 +1,16 @@
+<template>
+    <div id="Task">
+        <h1>Task</h1>
+    </div>
+</template>
+
+
+<script>
+export default {
+    name: 'Task'
+}
+</script>
+
+<style scoped>
+
+</style>
