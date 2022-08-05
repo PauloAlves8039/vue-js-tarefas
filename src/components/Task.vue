@@ -1,9 +1,10 @@
 <template>
     <div id="task">
-        <form>
+        <form @submit.prevent="addItem">
             <input 
             type="text"
             placeholder="Tarefa de hoje?"
+            v-model="tarefa"
             >
             <button type="submit">Adicionar</button>
         </form>
@@ -13,7 +14,27 @@
 
 <script>
 export default {
-    name: 'Task'
+    name: 'Task',
+    data(){
+        return{
+            tarefa: '',
+            tarefas: [],
+        }
+    },
+    methods:{
+        addItem(){
+            if(this.tarefa !== ''){
+                this.tarefas.push({
+                    text: this.tarefa,
+                    key: Date.now(),
+                });
+            }else {
+                alert('Digite uma tarefa...');
+                return;
+            }
+            this.tarefa = '';
+        }
+    }
 }
 </script>
 
