@@ -8,14 +8,13 @@
             >
             <button type="submit">Adicionar</button>
         </form>
-
         <Item :lista="tarefas" :delete="deleteTask" />
-
     </div>
 </template>
 
 
 <script>
+
 import Item from './Item';
 export default {
     name: 'Task',
@@ -49,6 +48,18 @@ export default {
 
             return this.tarefas = filtro;
         }
+    },
+    watch: {
+        tarefas:{
+            deep: true,
+            handler(){
+                localStorage.setItem('tasks', JSON.stringify(this.tarefas));
+            }
+        }
+    },
+    created(){
+        const json =localStorage.getItem('tasks');
+        this.tarefas = JSON.parse(json) || [];
     }
 }
 </script>
