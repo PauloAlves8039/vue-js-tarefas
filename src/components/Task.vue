@@ -8,7 +8,12 @@
             >
             <button type="submit">Adicionar</button>
         </form>
+
         <Item :lista="tarefas" :delete="deleteTask" />
+        
+        <span v-show="tarefas.length > 0">
+            Você tem <strong :class="{pend: pendente}">{{tarefas.length}}</strong> tarefas pendentes.
+        </span>
     </div>
 </template>
 
@@ -25,6 +30,7 @@ export default {
         return{
             tarefa: '',
             tarefas: [],
+            pendente: true
         }
     },
     methods:{
@@ -54,6 +60,7 @@ export default {
             deep: true,
             handler(){
                 localStorage.setItem('tasks', JSON.stringify(this.tarefas));
+                this.tarefas.length > 4 ? this.pendente = true : this.pendente = false;
             }
         }
     },
@@ -100,6 +107,10 @@ export default {
         border-radius: 4px;
         font-size: 14px;
         outline: none;
+    }
+
+    .pend{
+        color: #FF0000;
     }
     
 </style>
